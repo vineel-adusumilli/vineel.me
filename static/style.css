@@ -1,23 +1,36 @@
-.container {
-  margin-top: 30px;
+.quiet {
+  color: rgb(150, 150, 150);
 }
 
-#header a {
+a {
   text-decoration: none;
-  color: rgb(102, 102, 102);
+  color: rgb(150, 150, 150);
 }
 
-#header a:hover {
+a:visited {
+  color: rgb(150, 150, 150);
+}
+
+a:hover {
   color: rgb(0, 0, 0);
 }
 
-#title {
-  
+.container {
+  margin-top: 30px;
 }
 
 #nav {
   text-align: right;
   font-size: 18px;
+}
+
+#nav ul {
+  margin: 0px;
+}
+
+#nav ul li {
+  list-style-type: none;
+  display: inline-block;
 }
 
 #footer {
