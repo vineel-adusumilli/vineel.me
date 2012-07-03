@@ -10,7 +10,7 @@ def index():
 @app.route('/<page>/')
 def go_to(page):
   if page in pages:
-    return render_template('index.html', title=page, pages=pages, current=page)
+    return render_template('%s.html' % page, title=page, pages=pages, current=page)
   else:
     abort(404)
 
