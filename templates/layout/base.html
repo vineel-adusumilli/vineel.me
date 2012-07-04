@@ -8,6 +8,8 @@
     
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
     
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans|Bevan' rel='stylesheet' type='text/css'>
+    
     <link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="/static/blueprint/print.css" type="text/css" media="print" />
     <!--[if lt IE 8]>
@@ -19,7 +21,7 @@
   <body>
     <div class="container">
       <div id="header" class="span-24">
-        <div id="title" class="span-12">
+        <div id="title" class="span-8">
           <h1>
             <a href="/">
               {% if not current in pages %}
@@ -30,7 +32,7 @@
             </a>
           </h1>
         </div>
-        <div id="nav" class="span-12 last">
+        <div id="nav" class="span-16 last">
           <ul>
             {% for page in pages %}
               <li>
