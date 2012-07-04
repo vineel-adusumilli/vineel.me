@@ -2,7 +2,7 @@
   color: rgb(150, 150, 150);
 }
 
-a {
+a:link {
   text-decoration: none;
   color: rgb(150, 150, 150);
 }
@@ -12,6 +12,18 @@ a:visited {
 }
 
 a:hover {
+  color: rgb(0, 0, 0);
+}
+
+a:active {
+  color: rgb(0, 0, 0);
+}
+
+a:focus {
+  color: rgb(150, 150, 150);
+}
+
+a:focus:hover {
   color: rgb(0, 0, 0);
 }
 
