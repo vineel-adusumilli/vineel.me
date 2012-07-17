@@ -101,7 +101,7 @@ a:hover, a:active, a:focus:hover {
   color: rgb(255, 255, 255);
 }
 
-#header a:hover, a:active, a:focus:hover {
+#header a:hover, #header a:active, #header a:focus:hover {
   color: rgb(255, 255, 255);
 }
 
