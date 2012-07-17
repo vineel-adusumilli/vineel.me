@@ -1,55 +1,154 @@
-.container {
-  font-family: "Pontano Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+html, body {
+  height: 100%;
 }
 
-.quiet {
-  color: rgb(150, 150, 150);
+body {
+  background-image: url('/static/images/dots.png');
+  background-attachment: fixed;
+  font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
 
-a:link {
+h2 {
+  margin: 9px 0px;
+}
+
+a:link, a:visited, a:focus, #copy {
   text-decoration: none;
   color: rgb(150, 150, 150);
 }
 
-a:visited {
-  color: rgb(150, 150, 150);
-}
-
-a:hover {
+a:hover, a:active, a:focus:hover {
+  text-decoration: none;
   color: rgb(0, 0, 0);
 }
 
-a:active {
-  color: rgb(0, 0, 0);
+.inner {
+  width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-a:focus {
-  color: rgb(150, 150, 150);
+.item, .link {
+  margin: 20px auto;
 }
 
-a:focus:hover {
-  color: rgb(0, 0, 0);
+.item, .link, #footer {
+  background-color: rgb(255, 255, 255);
 }
 
-.container {
-  margin-top: 30px;
+.item, .thumbnail {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.item {
+  width: 820px;
+  padding: 10px 20px;
+}
+
+.link, .thumbnail {
+  width: 820px;
+}
+
+.link {
+  position: relative;
+}
+
+.thumbnail {
+  height: 300px;
+}
+
+.caption {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: absolute;
+  top: 230px;
+  left: -3px;
+  width: 786px;
+  height: 36px;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.caption h2 {
+  margin: 0px;
+}
+
+.shadow {
+  display: none;
+}
+
+#container {
+  min-height: 100%;
+}
+
+#header, #footer, .item, .thumbnail {
+  -moz-box-shadow: 0 0 5px 5px rgb(136, 136, 136);
+  -webkit-box-shadow: 0 0 5px 5px rgb(136, 136, 136);
+  box-shadow: 0 0 5px 5px rgb(136, 136, 136);
+}
+
+#header {
+  background-image: url('/static/images/cartographer.png');
+  height: 54px;
+}
+
+#header .loud {
+  color: rgb(255, 255, 255);
+}
+
+#header a:hover, a:active, a:focus:hover {
+  color: rgb(255, 255, 255);
+}
+
+#title {
+  float: left;
+  padding-top: 8px;
 }
 
 #nav {
-  text-align: right;
+  float: right;
   font-size: 18px;
 }
 
 #nav ul {
   margin: 0px;
+  padding-top: 12px;
 }
 
 #nav ul li {
   list-style-type: none;
   display: inline-block;
-  padding: 0.3em;
+  padding-left: 10px;
+}
+
+#content {
+  overflow: auto;
+  padding-bottom: 36px;
+  clear: both;
 }
 
 #footer {
-  text-align: right;
+  position: relative;
+  margin-top: -36px;
+  height: 36px;
+  clear: both;
+}
+
+/* Opera fix */
+body:before {
+  content: "";
+  height: 100%;
+  float: left;
+  width: 0px;
+  margin-top: -32767px;
+}
+
+#copy {
+  float: right;
+  padding-top: 10px;
 }

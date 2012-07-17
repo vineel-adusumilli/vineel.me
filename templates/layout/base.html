@@ -6,55 +6,62 @@
     
     <title>{{ title + ' &mdash;'|safe if title }} vineel adusumilli</title>
     
-    <link rel="icon" href="/static/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
     
-    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans|Bevan' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Pontano+Sans|Bevan' rel='stylesheet' type='text/css' />
     
-    <link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <link rel="stylesheet" href="/static/blueprint/print.css" type="text/css" media="print" />
-    <!--[if lt IE 8]>
-      <link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
-    <![endif]-->
+    <link rel="stylesheet" href="/static/blueprint/reset.css" type="text/css" />
+    <link rel="stylesheet" href="/static/blueprint/typography.css" type="text/css" />
     <link rel="stylesheet" href="/static/style.css" type="text/css" />
+    <!--[if !IE 7]>
+	    <style type="text/css">
+	  	  #container {display:table;height:100%}
+	    </style>
+    <![endif]-->
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="/static/script.js"></script>
     {% endblock %}
   </head>
   <body>
-    <div class="container">
-      <div id="header" class="span-24">
-        <div id="title" class="span-10">
-          <h1>
-            <a href="/">
-              {% if current == 'index' %}
-                <span class="loud">vineel adusumilli</span>
-              {% else %}
-                vineel adusumilli
-              {% endif %}
-            </a>
-          </h1>
-        </div>
-        <div id="nav" class="span-14 last">
-          <ul>
-            {% for page in pages %}
-              <li>
-                <a href="/{{ page }}/">
-                  {% if current == page %}
-                    <span class="loud">{{ page }}</span>
-                  {% else %}
-                    {{ page }}
-                  {% endif %}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+    <div id="container">
+      <div id="header">
+        <div class="inner">
+          <div id="title">
+            <h1>
+              <a href="/">
+                {% if current == 'index' %}
+                  <span class="loud">vineel adusumilli</span>
+                {% else %}
+                  vineel adusumilli
+                {% endif %}
+              </a>
+            </h1>
+          </div>
+          <div id="nav">
+            <ul>
+              {% for page in pages %}
+                <li>
+                  <a href="/{{ page }}/">
+                    {% if current == page %}
+                      <span class="loud">{{ page }}</span>
+                    {% else %}
+                      {{ page }}
+                    {% endif %}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="span-24"><hr /></div>
-      <div id="content" class="span-24">{% block content %}{% endblock %}</div>
-      <div class="span-24"><hr /></div>
-      <div id="footer" class="span-24 quiet">
-        {% block footer %}
-        <p>&copy; 2012</p>
-        {% endblock %}
+      <div id="content">
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+    <div id="footer">
+      <div class="inner">
+        <div id="copy">&copy; 2012</div>
       </div>
     </div>
   </body>
