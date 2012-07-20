@@ -87,9 +87,9 @@ a:hover, a:active, a:focus:hover {
 }
 
 #header, #footer, .item, .thumbnail {
-  -moz-box-shadow: 0 0 5px 5px rgb(136, 136, 136);
-  -webkit-box-shadow: 0 0 5px 5px rgb(136, 136, 136);
-  box-shadow: 0 0 5px 5px rgb(136, 136, 136);
+  -moz-box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
+  -webkit-box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
+  box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
 }
 
 #header {
