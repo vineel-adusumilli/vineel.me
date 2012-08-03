@@ -1,3 +1,9 @@
+#header {
+  width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 html, body {
   height: 100%;
 }
@@ -12,7 +18,7 @@ h2 {
   margin: 9px 0px;
 }
 
-a:link, a:visited, a:focus, #copy {
+a:link, a:visited, a:focus {
   text-decoration: none;
   color: rgb(150, 150, 150);
 }
@@ -23,7 +29,7 @@ a:hover, a:active, a:focus:hover {
 }
 
 .inner {
-  width: 900px;
+  width: 780px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -32,7 +38,7 @@ a:hover, a:active, a:focus:hover {
   margin: 20px auto;
 }
 
-.item, .link, #footer {
+.item, .link {
   background-color: rgb(255, 255, 255);
 }
 
@@ -45,6 +51,7 @@ a:hover, a:active, a:focus:hover {
 .item {
   width: 780px;
   padding: 10px 20px;
+  margin-bottom: 26px;
 }
 
 .link, .thumbnail {
@@ -53,6 +60,7 @@ a:hover, a:active, a:focus:hover {
 
 .link {
   position: relative;
+  min-height: 300px;
 }
 
 .thumbnail {
@@ -62,12 +70,12 @@ a:hover, a:active, a:focus:hover {
 .caption {
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 23px;
+  padding-right: 23px;
   position: absolute;
   top: 230px;
   left: -3px;
-  width: 786px;
+  width: 780px;
   height: 36px;
   background-color: rgb(255, 255, 255);
   opacity: 0.8;
@@ -86,7 +94,7 @@ a:hover, a:active, a:focus:hover {
   min-height: 100%;
 }
 
-#header, #footer, .item, .thumbnail {
+#header, .item, .thumbnail {
   -moz-box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
   -webkit-box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
   box-shadow: 0px 0px 10px 2px rgb(136, 136, 136);
@@ -94,7 +102,10 @@ a:hover, a:active, a:focus:hover {
 
 #header {
   background-image: url('/static/images/cartographer.png');
-  height: 54px;
+  height: 56px;
+  -moz-border-radius: 0px 0px 5px 5px;
+  -webkit-border-radius: 0px 0px 5px 5px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 #header .loud {
@@ -117,7 +128,7 @@ a:hover, a:active, a:focus:hover {
 
 #nav ul {
   margin: 0px;
-  padding-top: 12px;
+  padding-top: 13px;
 }
 
 #nav ul li {
@@ -128,14 +139,14 @@ a:hover, a:active, a:focus:hover {
 
 #content {
   overflow: auto;
-  padding-bottom: 36px;
+  padding-bottom: 48px;
   clear: both;
 }
 
 #footer {
   position: relative;
-  margin-top: -36px;
-  height: 36px;
+  margin-top: -48px;
+  height: 48px;
   clear: both;
 }
 
@@ -148,7 +159,17 @@ body:before {
   margin-top: -32767px;
 }
 
+#icons {
+  float: left;
+}
+
+#icons img {
+  padding-top: 8px;
+  padding-right: 8px;
+}
+
 #copy {
   float: right;
-  padding-top: 10px;
+  font-size: 14px;
+  padding-top: 15px;
 }

@@ -4,4 +4,11 @@
   <div class="item">
     <h2>I'm a student, programmer, and electronics hobbyist from <a href="http://en.wikipedia.org/wiki/San_Diego">San Diego, CA</a>.</h2>
   </div>
+  {% for link in links %}
+    {{ macros.linkitem(*link) }}
+  {% else %}
+    <div class="item">
+      <h2>I've been too lazy lately.</h2>
+    </div>
+  {% endfor %}
 {% endblock %}

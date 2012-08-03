@@ -1,40 +1,7 @@
 {% extends 'layout/base.html' %}
 
+{% block title %}experiments &mdash; {{ super() }}{% endblock %}
+
 {% block content %}
-  <div class="link">
-    <a href="#">
-    <img class="thumbnail rollover" src="/static/images/experiments/cycloid-fun/thumbnail-off.jpg" />
-    <img class="shadow" src="/static/images/experiments/cycloid-fun/thumbnail-on.jpg" />
-    <div class="caption">
-      <h2>Cycloid Fun</h2>
-    </div>
-    </a>
-  </div>
-  <div class="link">
-    <a href="#">
-    <img class="thumbnail rollover" src="/static/images/experiments/new-york-skyline/thumbnail-off.jpg" />
-    <img class="shadow" src="/static/images/experiments/new-york-skyline/thumbnail-on.jpg" />
-    <div class="caption">
-      <h2>New York Skyline</h2>
-    </div>
-    </a>
-  </div>
-  <div class="link">
-    <a href="#">
-    <img class="thumbnail rollover" src="/static/images/experiments/golden-gate-bridge/thumbnail-off.jpg" />
-    <img class="shadow" src="/static/images/experiments/golden-gate-bridge/thumbnail-on.jpg" />
-    <div class="caption">
-      <h2>Golden Gate Bridge</h2>
-    </div>
-    </a>
-  </div>
-  <div class="link">
-    <a href="#">
-    <img class="thumbnail rollover" src="/static/images/experiments/joshua-tree-national-park/thumbnail-off.jpg" />
-    <img class="shadow" src="/static/images/experiments/joshua-tree-national-park/thumbnail-on.jpg" />
-    <div class="caption">
-      <h2>Joshua Tree National Park</h2>
-    </div>
-    </a>
-  </div>
+  {{ macros.linkitems(current, links, "I'm waiting for my lab coat to arrive.") }}
 {% endblock %}

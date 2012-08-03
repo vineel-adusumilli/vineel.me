@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 
+{% block title %}articles &mdash; {{ super() }}{% endblock %}
+
 {% block content %}
-  <div class="item">
-    <h2>Let's just say I have writer's block.</h2>
-  </div>
+  {{ macros.linkitems(current, links, "Let's just say I have writer's block.") }}
 {% endblock %}

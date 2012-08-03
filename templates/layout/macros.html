@@ -1,0 +1,28 @@
+{% macro linkitem(page, link) -%}
+  <div class="link">
+    <a href="{{ link | link(page) }}">
+      <img class="thumbnail" src="{{ link | thumbnail_off(page) }}" alt="{{ link }}"/>
+      <img class="shadow" src="{{ link | thumbnail_on(page) }}" />
+      <div class="caption">
+        <h2>{{ link }}</h2>
+      </div>
+    </a>
+  </div>
+{%- endmacro %}
+
+{% macro linkitems(current, links, alt) -%}
+  {% for link in links %}
+    {{ linkitem(current, link) }}
+  {% else %}
+    <div class="item">
+      <h2>{{ alt }}</h2>
+    </div>
+  {% endfor %}
+{%- endmacro %}
+
+{% macro icon(service, link) -%}
+  <a href="{{ link }}">
+    <img class="rollover" src="{{ service | icon_off }}" alt="{{ service }}"/>
+    <img class="shadow" src="{{ service | icon_on }}" />
+  </a>
+{%- endmacro %}

@@ -1,6 +1,10 @@
 {% extends 'layout/base.html' %}
 
+{% block title %}500 &mdash; {{ super() }}{% endblock %}
+
 {% block content %}
-  <h2>Internal server error.<h2>
-  <h2>Did something go wrong? <a href="/contact">Let me know.</a></h2>
+  <div class="item">
+    <h2>Internal server error.<h2>
+    <h2>Did something go wrong? <a href="/contact">Let me know.</a></h2>
+  </div>
 {% endblock %}

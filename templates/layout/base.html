@@ -1,10 +1,12 @@
+{% import 'layout/macros.html' as macros %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     {% block head %}
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>{{ title + ' &mdash;'|safe if title }} vineel adusumilli</title>
+    <title>{% block title %}vineel adusumilli{% endblock %}</title>
     
     <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon" />
     
@@ -61,6 +63,12 @@
     </div>
     <div id="footer">
       <div class="inner">
+        <div id="icons">
+          {{ macros.icon('Google Plus', 'https://plus.google.com/u/0/110830710944383570018/posts') }}
+          {{ macros.icon('Twitter', 'https://twitter.com/Vineel_A') }}
+          {{ macros.icon('LinkedIn', 'https://www.linkedin.com/pub/vineel-adusumilli/55/94a/554') }}
+          {{ macros.icon('GitHub', 'https://github.com/vineel-adusumilli') }}
+        </div>
         <div id="copy">&copy; 2012</div>
       </div>
     </div>
