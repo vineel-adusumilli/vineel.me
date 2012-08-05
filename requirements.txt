@@ -1,5 +1,7 @@
 Flask==0.9
+Flask-Markdown==0.3
 Jinja2==2.6
+Markdown==2.2.0
 Werkzeug==0.8.3
 distribute==0.6.27
 gunicorn==0.14.5
