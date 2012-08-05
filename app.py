@@ -1,6 +1,8 @@
 import ConfigParser
 from flask import Flask, render_template, abort
+from flaskext.markdown import Markdown
 app = Flask(__name__)
+Markdown(app)
 
 pages = []
 sub_pages = {}
@@ -8,19 +10,36 @@ sub_pages = {}
 @app.route('/')
 def index():
   recent = []
-  for (page, links) in sub_pages.items():
-    if links:
-      recent.append((page, links[0]))
-  return render_template('index.html', pages=pages, links=recent, current='index')
+  for (page, titles) in sub_pages.items():
+    if titles:
+      recent.append((page, titles[0][1]))
+  return render_template('index.html', pages=pages, titles=recent, current='index')
 
 @app.route('/<page>/')
 def go_to(page):
   page = linkname(page)
   if page in pages:
     print sub_pages[page]
-    return render_template('pages/%s.html' % page, pages=pages, links=sub_pages[page], current=page)
+    return render_template('pages/%s.html' % page, pages=pages, titles=get_titles(page), current=page)
   else:
     abort(404)
+
+@app.route('/<page>/<link>/')
+def item(page, link):
+  page = linkname(page)
+  link = linkname(link)
+  print '/%s/%s/' % (page, link)
+  print page in pages
+  print is_link(page, link)
+  if page in pages and is_link(page, link):
+    try:
+      f = open('markdown/%s/%s.md' % (page, link), 'rb')
+      content = f.read()
+      f.close()
+    except:
+      content = ''
+    return render_template('/markdown.html', pages=pages, current=page, title=get_title(page, link), content=content)
+  abort(404)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -33,7 +52,7 @@ def internal_server_error(e):
 # converts Title into link version
 # example: "O' Green World" would become "o-green-world"
 def linkname(title):
-  title = ''.join(c for c in title if c.isalnum() or c.isspace())
+  title = ''.join(c for c in title if c.isalnum() or c.isspace() or c == '-')
   return title.lower().replace(' ', '-')
 
 def link(title, page):
@@ -59,6 +78,29 @@ app.jinja_env.filters['thumbnail_off'] = thumbnail_off
 app.jinja_env.filters['icon_on']       = icon_on
 app.jinja_env.filters['icon_off']      = icon_off
 
+def get_titles(page):
+  return [title for (_, title) in sub_pages[page]]
+
+def get_links(page):
+  return [link for (link, _) in sub_pages[page]]
+
+def get_title(page, link):
+  for (l, t) in sub_pages[page]:
+    if link == l:
+      return t
+
+def is_title(page, title):
+  for (_, t) in sub_pages[page]:
+    if title == t:
+      return True
+  return False
+
+def is_link(page, link):
+  for (l, _) in sub_pages[page]:
+    if link == l:
+      return True
+  return False
+
 def init():
   cfg = ConfigParser.ConfigParser()
   cfg.read('pages.cfg')
@@ -66,10 +108,10 @@ def init():
   for (_, page) in cfg.items('pages'):
     pages.append(page)
     
-    links = []
-    for (_, link) in cfg.items(page):
-      links.insert(0, link)
-    sub_pages[page] = links
+    titles = []
+    for (_, title) in cfg.items(page):
+      titles.insert(0, (linkname(title), title))
+    sub_pages[page] = titles
 
 if __name__ == '__main__':
   init()
