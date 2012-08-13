@@ -60,10 +60,10 @@ def link(title, page):
   return '/%s/%s/' % (page, linkname(title))
 
 def thumbnail_on(title, page):
-  return '/static/%s/%s/thumbnail-on.jpg' % (page, linkname(title)) 
+  return 'https://s3.amazonaws.com/vineel.me/%s/%s/thumbnail-on.jpg' % (page, linkname(title)) 
 
 def thumbnail_off(title, page):
-  return '/static/%s/%s/thumbnail-off.jpg' % (page, linkname(title)) 
+  return 'https://s3.amazonaws.com/vineel.me/%s/%s/thumbnail-off.jpg' % (page, linkname(title)) 
 
 def icon_on(service):
   return '/static/images/%s-on.png' % linkname(service)
