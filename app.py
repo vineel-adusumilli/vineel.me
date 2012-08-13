@@ -1,58 +1,85 @@
-import ConfigParser
 import os
+from datetime import datetime
 from flask import Flask, render_template, abort
+from flask.ext.sqlalchemy import SQLAlchemy
 from flaskext.markdown import Markdown
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://vineelme:vineelme@localhost/vineelme')
+db = SQLAlchemy(app)
 Markdown(app)
 
-pages = []
-sub_pages = {}
+class Post(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  title = db.Column(db.String(80), unique=True)
+  link = db.Column(db.String(80), unique=True)
+  body = db.Column(db.Text)
+  pub_date = db.Column(db.DateTime)
+
+  category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+  category = db.relationship('Category', backref=db.backref('posts', lazy='dynamic'))
+
+  def __init__(self, title, body, category, pub_date=None):
+    self.title = title
+    self.link = linkname(title)
+    self.body = body
+    if pub_date is None:
+      pub_date = datetime.utcnow()
+    self.pub_date = pub_date
+    self.category = category
+
+  def __repr__(self):
+    return '<Post %r>' % self.title
+
+class Category(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  name = db.Column(db.String(50), unique=True)
+  index = db.Column(db.Integer, unique=True)
+
+  def __init__(self, name, index):
+    self.name = name
+    self.index = index
+
+  def __repr__(self):
+    return '<Category %r>' % self.name
 
 @app.route('/')
 def index():
-  recent = []
-  for (page, titles) in sub_pages.items():
-    if titles:
-      recent.append((page, titles[0][1]))
+  recent = [ (p.category.name, p.title) for p in Post.query.order_by(Post.pub_date).limit(6).all() ]
+  pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
   return render_template('index.html', pages=pages, titles=recent, current='index')
 
 @app.route('/<page>/')
 def go_to(page):
   page = linkname(page)
-  if page in pages:
-    print sub_pages[page]
-    return render_template('pages/%s.html' % page, pages=pages, titles=get_titles(page), current=page)
-  else:
-    abort(404)
+  category = Category.query.filter_by(name=page).first_or_404()
+  pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
+  titles = [ p.title for p in category.posts.all() ]
+
+  return render_template('pages/%s.html' % page, pages=pages, titles=titles, current=page)
 
 @app.route('/<page>/<link>/')
 def item(page, link):
   page = linkname(page)
   link = linkname(link)
-  print '/%s/%s/' % (page, link)
-  print page in pages
-  print is_link(page, link)
-  if page in pages and is_link(page, link):
-    try:
-      f = open('markdown/%s/%s.md' % (page, link), 'rb')
-      content = f.read()
-      f.close()
-    except:
-      content = ''
-    return render_template('/markdown.html', pages=pages, current=page, title=get_title(page, link), content=content)
-  abort(404)
+  pages = [ c.name for c in Category.query.order_by(Category.index) ]
+  post = Post.query.filter_by(link=link).first_or_404()
+  return render_template('/markdown.html', pages=pages, current=page, title=post.title, content=post.body)
 
 @app.errorhandler(404)
 def page_not_found(e):
+  pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
   return render_template('errors/404.html', pages=pages), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
+  pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
   return render_template('errors/500.html', pages=pages), 500
 
 # converts Title into link version
 # example: "O' Green World" would become "o-green-world"
 def linkname(title):
+  title = title.strip()
   title = ''.join(c for c in title if c.isalnum() or c.isspace() or c == '-')
   return title.lower().replace(' ', '-')
 
@@ -79,43 +106,7 @@ app.jinja_env.filters['thumbnail_off'] = thumbnail_off
 app.jinja_env.filters['icon_on']       = icon_on
 app.jinja_env.filters['icon_off']      = icon_off
 
-def get_titles(page):
-  return [title for (_, title) in sub_pages[page]]
-
-def get_links(page):
-  return [link for (link, _) in sub_pages[page]]
-
-def get_title(page, link):
-  for (l, t) in sub_pages[page]:
-    if link == l:
-      return t
-
-def is_title(page, title):
-  for (_, t) in sub_pages[page]:
-    if title == t:
-      return True
-  return False
-
-def is_link(page, link):
-  for (l, _) in sub_pages[page]:
-    if link == l:
-      return True
-  return False
-
-def init():
-  cfg = ConfigParser.ConfigParser()
-  cfg.read('pages.cfg')
-  
-  for (_, page) in cfg.items('pages'):
-    pages.append(page)
-    
-    titles = []
-    for (_, title) in cfg.items(page):
-      titles.insert(0, (linkname(title), title))
-    sub_pages[page] = titles
-
 if __name__ == '__main__':
-  init()
   port = int(os.environ.get('PORT', 5000))
   app.run(host='0.0.0.0', port=port, debug=False)
   
