@@ -16,10 +16,16 @@ $(document).ready(function() {
   refit();
   
   function linkClippedImage() {
+    var parent = $(this).parent();
+    if (parent.hasClass('crop') || parent.is('a'))
+      return;
+
     var newImg = $(this).clone();
     newImg.removeAttr('width');
+    newImg.css('max-width', '');
     newImg.removeAttr('height');
-    $(newImg).css('display', 'none');
+    newImg.css('max-height', '');
+    newImg.css('display', 'none');
     $('body').append(newImg);
     var width = newImg.width();
     var height = newImg.height();
@@ -32,9 +38,7 @@ $(document).ready(function() {
     newImg.remove();
 
     if (width > this.width || height > this.height) {
-      var parent = $(this).parent();
-      if (!parent.hasClass('crop') && !parent.is('a'))
-        $(this).wrap('<a href='' + this.src + '' />');
+      $(this).wrap('<a href="' + this.src + '" />');
     }
   }
 
