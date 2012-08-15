@@ -96,10 +96,10 @@ a:hover, a:active, a:focus:hover {
 }
 
 .title, .link div {
-  padding-left: 23px;
-  padding-right: 23px;
+  padding-left: 20px;
+  padding-right: 20px;
   position: absolute;
-  width: 780px;
+  width: 786px;
   background-color: rgb(255, 255, 255);
   opacity: 0.8;
   filter: alpha(opacity=80);
@@ -112,7 +112,7 @@ a:hover, a:active, a:focus:hover {
 }
 
 .title h1 {
-  margin: 6px;
+  line-height: 48px;
 }
 
 .foot {
@@ -184,16 +184,19 @@ a:hover, a:active, a:focus:hover {
 
 #title {
   float: left;
-  margin-top: 8px;
+}
+
+#title h1 {
+  line-height: 56px;
 }
 
 #nav {
   float: right;
   font-size: 18px;
-  margin-top: 13px;
 }
 
 #nav ul {
+  line-height: 56px;
   margin: 0px;
 }
 
@@ -237,5 +240,6 @@ body:before {
 #copy {
   float: right;
   font-size: 14px;
-  margin-top: 15px;
+  line-height: 48px;
 }
+
