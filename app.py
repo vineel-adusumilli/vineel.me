@@ -1,13 +1,12 @@
 import os
 from datetime import datetime
-from flask import Flask, render_template, abort
+from markdown import markdown as md
+from flask import Flask, Markup, render_template, abort
 from flask.ext.sqlalchemy import SQLAlchemy
-from flaskext.markdown import Markdown
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgresql://vineelme:vineelme@localhost/vineelme')
 db = SQLAlchemy(app)
-Markdown(app)
 
 class Post(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -98,6 +97,15 @@ def icon_on(service):
 def icon_off(service):
   return '/static/images/%s-off.png' % linkname(service)
 
+def markdown(text, title=None, page=None):
+  prefix = ''
+  if title and page:
+    title = linkname(title)
+    page = linkname(page)
+    prefix = 'https://s3.amazonaws.com/vineel.me/%s/%s/' % (page, title)
+
+  return Markup(md(text, ['awsimage(PREFIX=%s)' % prefix]))
+
 # add custom filters to jinja2
 app.jinja_env.filters['linkname']      = linkname
 app.jinja_env.filters['link']          = link
@@ -105,6 +113,7 @@ app.jinja_env.filters['thumbnail_on']  = thumbnail_on
 app.jinja_env.filters['thumbnail_off'] = thumbnail_off
 app.jinja_env.filters['icon_on']       = icon_on
 app.jinja_env.filters['icon_off']      = icon_off
+app.jinja_env.filters['markdown']      = markdown
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
