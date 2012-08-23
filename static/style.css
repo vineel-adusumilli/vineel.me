@@ -5,7 +5,7 @@ html, body {
 body {
   background-image: url('/static/images/dots.png');
   background-attachment: fixed;
-  font-family: "Pontano Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-family: 'Pontano Sans', 'Verdana', 'Helvetica', sans-serif;
 }
 
 h2 {
@@ -46,6 +46,10 @@ a:hover, a:active, a:focus:hover {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
+}
+
+.item h2 {
+  font-family: 'Bevan', 'Georgia', serif;
 }
 
 .item {
@@ -111,6 +115,17 @@ a:hover, a:active, a:focus:hover {
 
 .title h1 {
   line-height: 48px;
+}
+
+.source {
+  padding: 10px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.source pre {
+  margin: 0px;
 }
 
 .foot {
@@ -206,6 +221,10 @@ a:hover, a:active, a:focus:hover {
   clear: both;
 }
 
+#intro h2 {
+  font-family: 'Pontano Sans', 'Verdana', 'Helvetica', sans-serif;
+}
+
 #footer {
   position: relative;
   margin-top: -48px;
@@ -215,7 +234,7 @@ a:hover, a:active, a:focus:hover {
 
 /* Opera fix */
 body:before {
-  content: "";
+  content: '';
   height: 100%;
   float: left;
   width: 0px;

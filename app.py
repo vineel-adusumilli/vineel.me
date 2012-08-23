@@ -44,7 +44,7 @@ class Category(db.Model):
 
 @app.route('/')
 def index():
-  recent = [ (p.category.name, p.title) for p in Post.query.order_by(Post.pub_date).limit(6).all() ]
+  recent = [ (p.category.name, p.title) for p in Post.query.order_by(Post.pub_date.desc()).limit(6).all() ]
   pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
   return render_template('index.html', pages=pages, titles=recent, current='index')
 
@@ -104,7 +104,7 @@ def markdown(text, title=None, page=None):
     page = linkname(page)
     prefix = 'https://s3.amazonaws.com/vineel.me/%s/%s/' % (page, title)
 
-  return Markup(md(text, ['awsimage(PREFIX=%s)' % prefix]))
+  return Markup(md(text, ['awsimage(PREFIX=%s)' % prefix, 'syntax']))
 
 # add custom filters to jinja2
 app.jinja_env.filters['linkname']      = linkname
@@ -117,5 +117,5 @@ app.jinja_env.filters['markdown']      = markdown
 
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
-  app.run(host='0.0.0.0', port=port, debug=False)
+  app.run(host='0.0.0.0', port=port, debug=True)
   

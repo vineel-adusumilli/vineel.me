@@ -2,10 +2,10 @@ import re
 import markdown
 from markdown.util import etree
 
-AWSIMAGE_RE = r'!(\[([^\]]*)\])?\{([^\}]*)\}'
+AWSIMAGE_RE = r'!(\[(.*?)\])?\{(.*?)\}'
 
 class AWSImageExtension(markdown.Extension):
-  def __init__ (self, configs):
+  def __init__(self, configs):
     self.config = { 'PREFIX': '' }
     
     for key, value in configs:
@@ -13,9 +13,6 @@ class AWSImageExtension(markdown.Extension):
 
   def extendMarkdown(self, md, md_globals):
     md.registerExtension(self)
-    self.parser = md.parser
-    self.md = md
-
     md.inlinePatterns.add('awsimage', AWSImagePattern(AWSIMAGE_RE, self.config), '<reference')
 
 class AWSImagePattern(markdown.inlinepatterns.Pattern):
