@@ -52,6 +52,10 @@ a:hover, a:active, a:focus:hover {
   font-family: 'Bevan', 'Georgia', serif;
 }
 
+.item h6 {
+  font-size: 2em;
+}
+
 .item {
   padding: 10px 20px;
   margin-bottom: 26px;
