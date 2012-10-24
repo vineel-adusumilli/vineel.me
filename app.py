@@ -53,7 +53,7 @@ def go_to(page):
   page = linkname(page)
   category = Category.query.filter_by(name=page).first_or_404()
   pages = [ c.name for c in Category.query.order_by(Category.index).all() ]
-  titles = [ p.title for p in category.posts.all() ]
+  titles = [ p.title for p in category.posts.order_by(Post.pub_date.desc()).all() ]
 
   return render_template('pages/%s.html' % page, pages=pages, titles=titles, current=page)
 
