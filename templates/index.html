@@ -5,8 +5,8 @@
     <h2>I'm a student, programmer, and electronics hobbyist from <a href="http://en.wikipedia.org/wiki/San_Diego">San Diego, CA</a>.</h2>
     <h2>This is what I've been doing lately:</h2>
   </div>
-  {% for title in titles %}
-    {{ macros.linkitem(*title) }}
+  {% for post in posts %}
+    {{ macros.linkitem(post) }}
   {% else %}
     <div class="item">
       <h2>Looks like I've been pretty lazy. :-/</h2>

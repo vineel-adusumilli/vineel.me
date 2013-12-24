@@ -75,4 +75,21 @@ $(document).ready(function() {
     }
   );
 
+  $('a.back').click(
+    function(e) {
+      e.preventDefault();
+      window.history.back();
+    }
+  );
+
+  $('a.confirm').click(
+    function(e) {
+      e.preventDefault();
+      if (confirm('Really?')) {
+        // Send delete request and reload page
+        $.post(this.href, {}, function() { location.reload(true); });
+      }
+    }
+  );
+
 }); 

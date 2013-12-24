@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}new &mdash; {{ super() }}{% endblock %}
+
+{% block content %}
+  <div class="item" id="intro">
+    <form method="POST">
+      Title:<input type="text" name="title" />
+      Category:<select name="category">
+        <option value=""></option>
+        <option value="projects">projects</option>
+        <option value="experiments">experiments</option>
+        <option value="articles">articles</option>
+      </select>
+      <textarea rows="30" cols="92" name="text"></textarea>
+      <input type="submit" value="Save Draft" />
+      <a href="#" class="back">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

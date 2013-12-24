@@ -1,0 +1,48 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}posts &mdash; {{ super() }}{% endblock %}
+
+{% block content %}
+  <div class="item">
+    {% if posts %}
+      <h2>Posts</h2>
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Publication Date</th>
+        </tr>
+        {% for post in posts %}
+          <tr>
+            <td><a href="{{ post | link }}">{{ post.title }}</a></td>
+            <td>{{ post.category.name }}</td>
+            <td>{{ post.pub_date }}</td>
+            <td><a href="{{ post | edit }}">Edit</a></td>
+            <td><a href="{{ post | unpublish }}" class="confirm">Unpublish</a></td>
+            <td><a href="{{ post | delete }}" class="confirm">Delete</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+    {% if drafts %}
+      <h2>Drafts</h2>
+      <table>
+        <tr>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Publication Date</th>
+        </tr>
+        {% for post in drafts %}
+          <tr>
+            <td><a href="{{ post | link }}">{{ post.title }}</a></td>
+            <td>{{ post.category.name }}</td>
+            <td>{{ post.pub_date }}</td>
+            <td><a href="{{ post | edit }}">Edit</a></td>
+            <td><a href="{{ post | publish }}" class="confirm">Publish</a></td>
+            <td><a href="{{ post | delete }}" class="confirm">Delete</a></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+{% endblock %}

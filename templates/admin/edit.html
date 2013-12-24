@@ -1,0 +1,33 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}edit &mdash; {{ super() }}{% endblock %}
+
+{% block content %}
+  <div class="item" id="intro">
+    <form method="POST">
+      Title:<input type="text" name="title" value="{{ post.title }}" />
+      Category:<select name="category">
+        <option value="projects" {{ 'selected' if post.category.name == 'projects' }}>projects</option>
+        <option value="experiments" {{ 'selected' if post.category.name == 'experiments' }}>experiments</option>
+        <option value="articles" {{ 'selected' if post.category.name == 'articles' }}>articles</option>
+      </select>
+      <textarea rows="30" style="width:100%" name="text">{{ post.body }}</textarea>
+      <input type="submit" value="Update" />
+      <a href="#" class="back">Cancel</a>
+    </form>
+  </div>
+  <div class="item">
+    <h2>Images</h2>
+    {% for image in images %}
+      <div style="display:inline-block;margin-right:20px;margin-bottom:20px;">
+        <img src="{{ image | image_url(post) }}" height="100px" />
+        <a href="{{ image | image_url(post) }}">{{ image }}</a> |
+        <a href="{{ image | image_delete(post) }}" class="confirm">Delete</a>
+      </div>
+    {% endfor %}
+    <form action="/admin/image/new/{{ post.id }}/" enctype="multipart/form-data" method="POST">
+      <input type="file" accept="image/*" name="image" />
+      <input type="submit" value="Upload" />
+    </form>
+  </div>
+{% endblock %}

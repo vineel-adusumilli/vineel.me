@@ -1,26 +1,26 @@
 {% extends 'layout/base.html' %}
 
-{% block title %}{{ title | lower }} &mdash; {{ super() }}{% endblock %}
+{% block title %}{{ post.title | lower }} &mdash; {{ super() }}{% endblock %}
 
 {% block content %}
   <div class="item">
     <div class="head">
       <div class="crop">
-        <img src="{{ title | thumbnail_on(current) }}" alt="{{ title }}" />
+        <img src="{{ post | thumbnail_on }}" alt="{{ post.title }}" />
       </div>
       <div class="title">
-        <h1>{{ title }}</h1>
+        <h1>{{ post.title }}</h1>
       </div>
     </div>
-    {{ content | markdown(title, current) }}
-    {% if content %}
+    {{ post | markdown }}
+    {% if post %}
       <p class="last">If I made any mistakes or omissions, please <a href="/contact/">let me know</a>. I would also appreciate any feedback.</p>
     {% else %}
       <p class="last">There seems to be no content here. That's odd. You should <a href="/contact/">let me know</a>.</p>
     {% endif %}
     <div class="foot">
       <div class="crop">
-        <img src="{{ title | thumbnail_on(current) }}" alt="{{ title }}" />
+        <img src="{{ post | thumbnail_on }}" alt="{{ post.title }}" />
       </div>
     </div>
   </div>

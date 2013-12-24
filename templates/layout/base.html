@@ -72,6 +72,23 @@
         </div>
       </div>
       <div id="content">
+        {% if admin %}
+          <div class="item">
+            <strong>Admin Tools:&nbsp;</strong>
+            <a href="/admin/posts/">Posts</a> |
+            <a href="/admin/new/">New</a> |
+            {% if post %}
+              <a href="{{ post | edit }}">Edit</a> |
+              {% if post.published %}
+                <a href="{{ post | unpublish }}" class="confirm">Unpublish</a> |
+              {% else %}
+                <a href="{{ post | publish }}" class="confirm">Publish</a> |
+              {% endif %}
+              <a href="{{ post | delete }}" class="confirm">Delete</a> |
+            {% endif %}
+            <a href="/admin/logout/">Logout</a>
+          </div>
+        {% endif %}
         {% block content %}{% endblock %}
       </div>
     </div>
@@ -83,7 +100,7 @@
           {{ macros.icon('LinkedIn', 'https://www.linkedin.com/pub/vineel-adusumilli/55/94a/554') }}
           {{ macros.icon('GitHub', 'https://github.com/vineel-adusumilli') }}
         </div>
-        <div id="copy">&copy; 2012</div>
+        <div id="copy">&copy; 2013</div>
       </div>
     </div>
   </body>
