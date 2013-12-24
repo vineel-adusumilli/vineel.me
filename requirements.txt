@@ -1,4 +1,4 @@
-distribute==0.7.3
+distribute==0.6.36
 Flask==0.9
 Flask-Bcrypt==0.5.2
 Flask-Login==0.2.8
