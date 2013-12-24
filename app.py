@@ -120,7 +120,8 @@ def ssl_required(fn):
   @wraps(fn)
   def decorated_view(*args, **kwargs):
     # Redirect to piggyback herokuapp.com SSL
-    if 'http://' in request.url:
+    # This is very hack-ish
+    if 'http://' in request.url and 'vineel' in request.url_root:
       return redirect(request.url.replace(request.url_root, 'https://vineel.herokuapp.com/'))
     return fn(*args, **kwargs)
 
