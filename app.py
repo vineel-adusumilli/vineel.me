@@ -152,7 +152,7 @@ def admin_login():
 @ssl_required
 def admin_logout():
   logout_user()
-  return redirect(request.referrer)
+  return redirect(request.referrer.replace('https://vineel.herokuapp.com', 'http://vineel.me'))
 
 @app.route('/admin/posts/')
 @login_required
